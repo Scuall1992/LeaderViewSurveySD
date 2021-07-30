@@ -163,14 +163,14 @@ for people in peoples[1:]:
     with open(filename, "w", encoding="utf-8") as f:
         sira = get_sira(people)
 
-        f.write("SIRAFA:\n\n")
-
-        f.write(f'Состояние: {sira[0]}/10\n')
-        f.write(f'Намерение: {sira[1]}/10\n')
-        f.write(f'Взаимоотношения: {sira[2]}/10\n')
-        f.write(f'Осознанность: {sira[3]}/10\n')
-        f.write(f'Гибкость: {sira[4]}/10\n\n')
-
+        #f.write("SIRAFA:\n\n")
+        # print(filename)
+        # print(f'Состояние: {sira[0]}/10\n')
+        # print(f'Намерение: {sira[1]}/10\n')
+        # print(f'Взаимоотношения: {sira[2]}/10\n')
+        # print(f'Осознанность: {sira[3]}/10\n')
+        # print(f'Гибкость: {sira[4]}/10\n\n')
+        # print()
 
         mindset = get_mindset(people)
 
@@ -183,6 +183,7 @@ for people in peoples[1:]:
         f.write(f'Желтый: {mindset[5]}/60 {round(mindset[5]*100/60,2)}%\n')
         f.write(f'Бирюзовый: {mindset[6]}/60 {round(mindset[6]*100/60,2)}%\n\n')
 
+        #f.write(f'Сумма баллов {sum(mindset)}')
 
         duress = get_duress_mindset(people)
 
@@ -196,6 +197,11 @@ for people in peoples[1:]:
         f.write(f'Желтый: {duress[5]}/15 {round(duress[5]*100/15,2)}%\n')
         f.write(f'Бирюзовый: {duress[6]}/15 {round(duress[6]*100/15,2)}%\n\n')
 
+        #f.write(f'Сумма баллов {sum(duress)}')
+
+        if sum(mindset) != 60 or sum(duress) != 15:
+            print(filename, "Wrong test")
+
         states = get_change_state(people)
 
         f.write("Фазы изменений:\n\n")
@@ -208,22 +214,22 @@ for people in peoples[1:]:
 
 
 
-    with open(filename, encoding="utf-8") as f:
-        data = f.read()
+    # with open(filename, encoding="utf-8") as f:
+    #     data = f.read()
 
-        send_email(people["info"][1], data)
+    #     send_email(people["info"][1], data)
 
 
 
-    data = people["answers"]
+    # data = people["answers"]
 
-    res = dict(zip(header["answers"], data))
+    # res = dict(zip(header["answers"], data))
 
-    buf = ""
+    # buf = ""
 
-    for k,v in res.items():
-        buf += f"{k}: {v}\n"
+    # for k,v in res.items():
+    #     buf += f"{k}: {v}\n"
 
     # print(buf)
 
-    send_email(people["info"][1], buf)
+    # send_email(people["info"][1], buf)
